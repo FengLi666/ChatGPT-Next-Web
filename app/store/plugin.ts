@@ -1,6 +1,6 @@
 import OpenAPIClientAxios from "openapi-client-axios";
 import { StoreKey } from "../constant";
-import { nanoid } from "nanoid";
+import { nanoid } from "../utils/nanoid";
 import { createPersistStore } from "../utils/store";
 import { getClientConfig } from "../config/client";
 import yaml from "js-yaml";
@@ -239,8 +239,9 @@ export const usePluginStore = createPersistStore(
       fetch("./plugins.json")
         .then((res) => res.json())
         .then((res) => {
+          const list = Array.isArray(res) ? res : [];
           Promise.all(
-            res.map((item: any) =>
+            list.map((item: any) =>
               // skip get schema
               state.get(item.id)
                 ? item

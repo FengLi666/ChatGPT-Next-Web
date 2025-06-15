@@ -18,10 +18,6 @@ import {
 import { prettyObject } from "@/app/utils/format";
 import { getClientConfig } from "@/app/config/client";
 import { getMessageTextContent, isVisionModel } from "@/app/utils";
-import mapKeys from "lodash-es/mapKeys";
-import mapValues from "lodash-es/mapValues";
-import isArray from "lodash-es/isArray";
-import isObject from "lodash-es/isObject";
 import { fetch } from "@/app/utils/stream";
 
 export interface OpenAIListModelResponse {
@@ -45,15 +41,17 @@ interface RequestPayload {
 }
 
 function capitalizeKeys(obj: any): any {
-  if (isArray(obj)) {
+  if (Array.isArray(obj)) {
     return obj.map(capitalizeKeys);
-  } else if (isObject(obj)) {
-    return mapValues(
-      mapKeys(obj, (value: any, key: string) =>
-        key.replace(/(^|_)(\w)/g, (m, $1, $2) => $2.toUpperCase()),
-      ),
-      capitalizeKeys,
-    );
+  } else if (obj && typeof obj === "object") {
+    const result: any = {};
+    Object.keys(obj).forEach((key) => {
+      const newKey = key.replace(/(^|_)(\w)/g, (_m, _1, $2) =>
+        $2.toUpperCase(),
+      );
+      result[newKey] = capitalizeKeys((obj as any)[key]);
+    });
+    return result;
   } else {
     return obj;
   }

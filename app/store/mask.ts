@@ -3,7 +3,7 @@ import { getLang, Lang } from "../locales";
 import { DEFAULT_TOPIC, ChatMessage } from "./chat";
 import { ModelConfig, useAppConfig } from "./config";
 import { StoreKey } from "../constant";
-import { nanoid } from "nanoid";
+import { nanoid } from "../utils/nanoid";
 import { createPersistStore } from "../utils/store";
 
 export type Mask = {

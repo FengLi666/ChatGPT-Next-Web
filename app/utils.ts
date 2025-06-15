@@ -6,7 +6,7 @@ import { ServiceProvider } from "./constant";
 // import { fetch as tauriFetch, ResponseType } from "@tauri-apps/api/http";
 import { fetch as tauriStreamFetch } from "./utils/stream";
 import { VISION_MODEL_REGEXES, EXCLUDE_VISION_MODEL_REGEXES } from "./constant";
-import { useAccessStore } from "./store";
+import { useAccessStore } from "./store/access";
 import { ModelSize } from "./typing";
 
 export function trimTopic(topic: string) {
