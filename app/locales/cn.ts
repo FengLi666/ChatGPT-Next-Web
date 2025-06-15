@@ -507,6 +507,17 @@ const cn = {
           SubTitle: "样例：",
         },
       },
+      Bedrock: {
+        Endpoint: {
+          Title: "接口地址",
+          SubTitle: "样例：",
+        },
+        ApiKey: {
+          Title: "访问密钥 ID",
+          SubTitle: "使用你的 AWS Access Key",
+          Placeholder: "Access Key ID",
+        },
+      },
       Stability: {
         ApiKey: {
           Title: "接口密钥",

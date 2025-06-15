@@ -88,6 +88,13 @@ declare global {
       SILICONFLOW_URL?: string;
       SILICONFLOW_API_KEY?: string;
 
+      // bedrock only
+      BEDROCK_URL?: string;
+      BEDROCK_ACCESS_KEY_ID?: string;
+      BEDROCK_SECRET_ACCESS_KEY?: string;
+      BEDROCK_SESSION_TOKEN?: string;
+      BEDROCK_REGION?: string;
+
       // custom template for preprocessing user input
       DEFAULT_INPUT_TEMPLATE?: string;
 
@@ -163,6 +170,7 @@ export const getServerSideConfig = () => {
   const isXAI = !!process.env.XAI_API_KEY;
   const isChatGLM = !!process.env.CHATGLM_API_KEY;
   const isSiliconFlow = !!process.env.SILICONFLOW_API_KEY;
+  const isBedrock = !!process.env.BEDROCK_ACCESS_KEY_ID;
   // const apiKeyEnvVar = process.env.OPENAI_API_KEY ?? "";
   // const apiKeys = apiKeyEnvVar.split(",").map((v) => v.trim());
   // const randomIndex = Math.floor(Math.random() * apiKeys.length);
@@ -245,6 +253,13 @@ export const getServerSideConfig = () => {
     isSiliconFlow,
     siliconFlowUrl: process.env.SILICONFLOW_URL,
     siliconFlowApiKey: getApiKey(process.env.SILICONFLOW_API_KEY),
+
+    isBedrock,
+    bedrockUrl: process.env.BEDROCK_URL,
+    bedrockAccessKeyId: process.env.BEDROCK_ACCESS_KEY_ID,
+    bedrockSecretAccessKey: process.env.BEDROCK_SECRET_ACCESS_KEY,
+    bedrockSessionToken: process.env.BEDROCK_SESSION_TOKEN,
+    bedrockRegion: process.env.BEDROCK_REGION,
 
     gtmId: process.env.GTM_ID,
     gaId: process.env.GA_ID || DEFAULT_GA_ID,

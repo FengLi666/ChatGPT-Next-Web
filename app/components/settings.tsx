@@ -75,6 +75,7 @@ import {
   ChatGLM,
   DeepSeek,
   SiliconFlow,
+  Bedrock,
 } from "../constant";
 import { Prompt, SearchService, usePromptStore } from "../store/prompt";
 import { ErrorBoundary } from "./error";
@@ -1360,6 +1361,81 @@ export function Settings() {
     </>
   );
 
+  const bedrockConfigComponent = accessStore.provider ===
+    ServiceProvider.Bedrock && (
+    <>
+      <ListItem
+        title={Locale.Settings.Access.Bedrock.Endpoint.Title}
+        subTitle={
+          Locale.Settings.Access.Bedrock.Endpoint.SubTitle +
+          Bedrock.ExampleEndpoint
+        }
+      >
+        <input
+          aria-label={Locale.Settings.Access.Bedrock.Endpoint.Title}
+          type="text"
+          value={accessStore.bedrockUrl}
+          placeholder={Bedrock.ExampleEndpoint}
+          onChange={(e) =>
+            accessStore.update(
+              (access) => (access.bedrockUrl = e.currentTarget.value),
+            )
+          }
+        ></input>
+      </ListItem>
+      <ListItem title="Access Key ID" subTitle="">
+        <PasswordInput
+          aria-label="Access Key ID"
+          value={accessStore.bedrockAccessKeyId}
+          type="text"
+          onChange={(e) => {
+            accessStore.update(
+              (access) => (access.bedrockAccessKeyId = e.currentTarget.value),
+            );
+          }}
+        />
+      </ListItem>
+      <ListItem title="Secret Access Key" subTitle="">
+        <PasswordInput
+          aria-label="Secret Access Key"
+          value={accessStore.bedrockSecretAccessKey}
+          type="text"
+          onChange={(e) => {
+            accessStore.update(
+              (access) =>
+                (access.bedrockSecretAccessKey = e.currentTarget.value),
+            );
+          }}
+        />
+      </ListItem>
+      <ListItem title="Session Token" subTitle="">
+        <PasswordInput
+          aria-label="Session Token"
+          value={accessStore.bedrockSessionToken}
+          type="text"
+          onChange={(e) => {
+            accessStore.update(
+              (access) => (access.bedrockSessionToken = e.currentTarget.value),
+            );
+          }}
+        />
+      </ListItem>
+      <ListItem title="Region" subTitle="">
+        <input
+          aria-label="Region"
+          type="text"
+          value={accessStore.bedrockRegion}
+          placeholder="ap-northeast-1"
+          onChange={(e) =>
+            accessStore.update(
+              (access) => (access.bedrockRegion = e.currentTarget.value),
+            )
+          }
+        />
+      </ListItem>
+    </>
+  );
+
   const stabilityConfigComponent = accessStore.provider ===
     ServiceProvider.Stability && (
     <>
@@ -1822,6 +1898,7 @@ export function Settings() {
                   {XAIConfigComponent}
                   {chatglmConfigComponent}
                   {siliconflowConfigComponent}
+                  {bedrockConfigComponent}
                 </>
               )}
             </>

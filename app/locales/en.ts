@@ -491,6 +491,17 @@ const en: LocaleType = {
           SubTitle: "Example: ",
         },
       },
+      Bedrock: {
+        Endpoint: {
+          Title: "Endpoint Address",
+          SubTitle: "Example: ",
+        },
+        ApiKey: {
+          Title: "Access Key ID",
+          SubTitle: "Use your AWS access key",
+          Placeholder: "Access Key ID",
+        },
+      },
       Stability: {
         ApiKey: {
           Title: "Stability API Key",
