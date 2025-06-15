@@ -5,7 +5,6 @@ import Locale from "../locales";
 import { InputRange } from "./input-range";
 import { ListItem, Select } from "./ui-lib";
 import { useAllModels } from "../utils/hooks";
-import { groupBy } from "lodash-es";
 import styles from "./model-config.module.scss";
 import { getModelProvider } from "../utils/model";
 
@@ -14,10 +13,14 @@ export function ModelConfigList(props: {
   updateConfig: (updater: (config: ModelConfig) => void) => void;
 }) {
   const allModels = useAllModels();
-  const groupModels = groupBy(
-    allModels.filter((v) => v.available),
-    "provider.providerName",
-  );
+  const groupModels = allModels
+    .filter((v) => v.available)
+    .reduce<Record<string, typeof allModels>>((acc, v) => {
+      const key = v.provider.providerName;
+      if (!acc[key]) acc[key] = [] as any;
+      (acc[key] as any).push(v);
+      return acc;
+    }, {});
   const value = `${props.modelConfig.model}@${props.modelConfig?.providerName}`;
   const compressModelValue = `${props.modelConfig.compressModel}@${props.modelConfig?.compressProviderName}`;
 

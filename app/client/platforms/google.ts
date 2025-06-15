@@ -24,7 +24,7 @@ import {
   isVisionModel,
 } from "@/app/utils";
 import { preProcessImageContent } from "@/app/utils/chat";
-import { nanoid } from "nanoid";
+import { nanoid } from "@/app/utils/nanoid";
 import { RequestPayload } from "./openai";
 import { fetch } from "@/app/utils/stream";
 

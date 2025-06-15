@@ -1,5 +1,4 @@
-import { Client } from "@modelcontextprotocol/sdk/client/index.js";
-import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js";
+import type { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { MCPClientLogger } from "./logger";
 import { ListToolsResponse, McpRequestMessage, ServerConfig } from "./types";
 import { z } from "zod";
@@ -11,6 +10,11 @@ export async function createClient(
   config: ServerConfig,
 ): Promise<Client> {
   logger.info(`Creating client for ${id}...`);
+
+  const { StdioClientTransport } = await import(
+    "@modelcontextprotocol/sdk/client/stdio.js"
+  );
+  const { Client } = await import("@modelcontextprotocol/sdk/client/index.js");
 
   const transport = new StdioClientTransport({
     command: config.command,

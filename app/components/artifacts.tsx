@@ -8,7 +8,7 @@ import {
 } from "react";
 import { useParams } from "react-router";
 import { IconButton } from "./button";
-import { nanoid } from "nanoid";
+import { nanoid } from "../utils/nanoid";
 import ExportIcon from "../icons/share.svg";
 import CopyIcon from "../icons/copy.svg";
 import DownloadIcon from "../icons/download.svg";

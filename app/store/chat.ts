@@ -6,7 +6,7 @@ import {
 } from "../utils";
 
 import { indexedDBStorage } from "@/app/utils/indexedDB-storage";
-import { nanoid } from "nanoid";
+import { nanoid } from "../utils/nanoid";
 import type {
   ClientApi,
   MultimodalContent,

@@ -120,7 +120,6 @@ import { ClientApi, MultimodalContent } from "../client/api";
 import { createTTSPlayer } from "../utils/audio";
 import { MsEdgeTTS, OUTPUT_FORMAT } from "../utils/ms_edge_tts";
 
-import { isEmpty } from "lodash-es";
 import { getModelProvider } from "../utils/model";
 import { RealtimeChat } from "@/app/components/realtime-chat";
 import clsx from "clsx";
@@ -1103,7 +1102,7 @@ function _Chat() {
   };
 
   const doSubmit = (userInput: string) => {
-    if (userInput.trim() === "" && isEmpty(attachImages)) return;
+    if (userInput.trim() === "" && attachImages.length === 0) return;
     const matchCommand = chatCommands.match(userInput);
     if (matchCommand.matched) {
       setUserInput("");

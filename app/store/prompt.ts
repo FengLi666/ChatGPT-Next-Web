@@ -1,5 +1,5 @@
 import Fuse from "fuse.js";
-import { nanoid } from "nanoid";
+import { nanoid } from "../utils/nanoid";
 import { StoreKey } from "../constant";
 import { getLang } from "../locales";
 import { createPersistStore } from "../utils/store";
