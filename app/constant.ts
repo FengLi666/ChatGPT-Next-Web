@@ -36,6 +36,8 @@ export const CHATGLM_BASE_URL = "https://open.bigmodel.cn";
 
 export const SILICONFLOW_BASE_URL = "https://api.siliconflow.cn";
 
+export const BEDROCK_BASE_URL = "https://bedrock-runtime.amazonaws.com";
+
 export const CACHE_URL_PREFIX = "/api/cache";
 export const UPLOAD_URL = `${CACHE_URL_PREFIX}/upload`;
 
@@ -72,6 +74,7 @@ export enum ApiPath {
   ChatGLM = "/api/chatglm",
   DeepSeek = "/api/deepseek",
   SiliconFlow = "/api/siliconflow",
+  Bedrock = "/api/bedrock",
 }
 
 export enum SlotID {
@@ -129,6 +132,7 @@ export enum ServiceProvider {
   ChatGLM = "ChatGLM",
   DeepSeek = "DeepSeek",
   SiliconFlow = "SiliconFlow",
+  Bedrock = "Bedrock",
 }
 
 // Google API safety settings, see https://ai.google.dev/gemini-api/docs/safety-settings
@@ -155,6 +159,7 @@ export enum ModelProvider {
   ChatGLM = "ChatGLM",
   DeepSeek = "DeepSeek",
   SiliconFlow = "SiliconFlow",
+  Bedrock = "Bedrock",
 }
 
 export const Stability = {
@@ -257,6 +262,11 @@ export const ChatGLM = {
 export const SiliconFlow = {
   ExampleEndpoint: SILICONFLOW_BASE_URL,
   ChatPath: "v1/chat/completions",
+};
+
+export const Bedrock = {
+  ExampleEndpoint: BEDROCK_BASE_URL,
+  ChatPath: "model/anthropic.chat-completions",
 };
 
 export const DEFAULT_INPUT_TEMPLATE = `{{input}}`; // input / time / model / lang
@@ -622,6 +632,8 @@ const siliconflowModels = [
   "THUDM/glm-4-9b-chat",
 ];
 
+const bedrockModels = anthropicModels;
+
 let seq = 1000; // 内置的模型序号生成器从1000开始
 export const DEFAULT_MODELS = [
   ...openaiModels.map((name) => ({
@@ -776,6 +788,17 @@ export const DEFAULT_MODELS = [
       providerName: "SiliconFlow",
       providerType: "siliconflow",
       sorted: 14,
+    },
+  })),
+  ...bedrockModels.map((name) => ({
+    name,
+    available: true,
+    sorted: seq++,
+    provider: {
+      id: "bedrock",
+      providerName: "Bedrock",
+      providerType: "bedrock",
+      sorted: 15,
     },
   })),
 ] as const;
